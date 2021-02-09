@@ -154,7 +154,26 @@
 		            </execution>
 		        </executions>
 		</plugin>
+		
         </plugins>
     </build>
+	<distributionManagement>
+    <repository>
+      <id>deployment</id>
+      <name>Releases</name>
+      <url>http://10.5.5.7:8090/repository/maven-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>deployment</id>
+      <name>Snapshot</name>
+      <url>http://10.5.5.7:8090/repository/maven-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <repositories>
+    <repository>
+      <id>maven-jenkins-repo</id>
+      <url>http://10.5.5.7:8090/jenkins/plugin/repository/everything/</url>
+    </repository>
+ </repositories>
 </project>
 
