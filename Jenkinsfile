@@ -40,8 +40,8 @@ pipeline {
 		    
 	    stage('Pushing nexus') {
 		    steps {
-			    echo 'Pushing war to s3..'
-			  //  sh 'mvn -e clean deploy'
+			    echo 'Pushing war to nexus..'
+			    sh 'mvn -e clean deploy'
         //sh 'aws s3 ls'
         //sh 'aws s3 cp /var/lib/jenkins/workspace/Maven_pip/target/mywebsiteProject-mywebsiteProject*.war s3://cicd-testings/${BUILD_NUMBER}/'
         //sh 'aws cp 
