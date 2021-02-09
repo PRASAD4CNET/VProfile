@@ -28,7 +28,7 @@ pipeline {
       steps {
         echo 'Building..'
 	sh 'mvn clean install'     
-	sh 'mvn sonar:sonar -Dsonar.projectKey=VProfile -Dsonar.host.url=http://10.5.5.6:9000 -Dsonar.login=b3dcee08d2d4702732fe535ca314268cf5f875e2'
+	sh 'mvn sonar:sonar -Dsonar.projectKey=VProfiles -Dsonar.host.url=http://10.5.5.6:9000 -Dsonar.login=b3dcee08d2d4702732fe535ca314268cf5f875e2'
        // sh 'mvn clean install'
 	      //sonar:sonar -Dsonar.host.url=http://ec2-18-188-22-235.us-east-2.compute.amazonaws.com:9000 -Dsonar.login=admin -Dsonar.password=admin
 	      //sh 'mvn clean install'
