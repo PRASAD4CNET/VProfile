@@ -10,7 +10,7 @@ pipeline {
         NEXUS_VERSION = "nexus3"
         NEXUS_PROTOCOL = "http"
         NEXUS_URL = "10.5.5.7:8090"
-        NEXUS_REPOSITORY = "maven-nexus-repo"
+        NEXUS_REPOSITORY = "repository-example"
         NEXUS_CREDENTIAL_ID = "Jenkins_Nexus"
     }
   /* triggers added by prasad
