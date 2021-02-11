@@ -12,6 +12,7 @@ pipeline {
                     sh 'mvn clean package'
                      def maven_version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                          //sh "mvn package -DskipTests=true"
+                    echo " building version ${maven_version}"
                        }
             }
         }
