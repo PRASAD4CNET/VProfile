@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh 'mvn clean package'
-                     def version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                     def maven_version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                     
                     //sh "mvn package -DskipTests=true"
                     // Archive the built artifacts
@@ -19,7 +19,7 @@ pipeline {
                 }
             }
         }
-        stage("Maven build number") {
+       /* stage("Maven build number") {
            steps {
                
                 sh "mvn -N help:effective-pom -Doutput=pom.xml"
@@ -34,7 +34,7 @@ pipeline {
 
                          echo "Building ${projectArtifactId}:${projectVersion}"
                         }
-        }
+        }*/
         stage("Sonar Analysis") {
             steps {
                 script {
