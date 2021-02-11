@@ -11,30 +11,10 @@ pipeline {
                 script {
                     sh 'mvn clean package'
                      def maven_version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                    echo "Building__________________________________________________________ ${maven_version}"
-                    //sh "mvn package -DskipTests=true"
-                    // Archive the built artifacts
-            //archive includes: 'target/**.war'
-
-                }
+                         //sh "mvn package -DskipTests=true"
+                       }
             }
         }
-       /* stage("Maven build number") {
-           steps {
-               
-                sh "mvn -N help:effective-pom -Doutput=pom.xml"
-
-                    script {
-                             pom = readMavenPom(file: 'pom.xml')
-                                projectArtifactId = pom.getArtifactId()
-                                projectGroupId = pom.getGroupId()
-                                 projectVersion = pom.getVersion()
-                                   projectName = pom.getName()
-                                }
-
-                         echo "Building ${projectArtifactId}:${projectVersion}"
-                        }
-        }*/
         stage("Sonar Analysis") {
             steps {
                 script {
@@ -46,7 +26,7 @@ pipeline {
         stage("Publish to Nexus Repository Manager ") {
             steps {
                 script {
-                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-$MAVEN_VERSION.war', type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '$MAVEN_VERSION'    
+                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-${maven_version}.war', type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '${maven_version}'    
                     //nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-2.0.0.war', type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '1.0.0'
                 }
             }
