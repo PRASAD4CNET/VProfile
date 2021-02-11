@@ -11,7 +11,7 @@ pipeline {
                 script {
                     sh 'mvn clean package'
                      def maven_version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
-                    echo "Building ${maven_version}"
+                    echo "Building__________________________________________________________ ${maven_version}"
                     //sh "mvn package -DskipTests=true"
                     // Archive the built artifacts
             //archive includes: 'target/**.war'
