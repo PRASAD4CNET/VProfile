@@ -10,7 +10,7 @@ pipeline {
             steps {
                 script {
                     sh 'mvn clean package'
-                     TAG_SELECTOR = readMavenPom().getVersion()
+                     
                     
                     //sh "mvn package -DskipTests=true"
                     // Archive the built artifacts
