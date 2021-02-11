@@ -5,15 +5,7 @@ pipeline {
        // jdk 'jdk8' 
     }
     stages {
-        stage("Clone code from VCS") {
-            steps {
-                script {
-            steps {
-
-                   git branch: 'jenkins_pipeline_success', changelog: false, poll: false, url: 'https://github.com/PRASAD4CNET/VProfile.git/';
-                }
-            }
-        }
+        
         stage("Maven Build") {
             steps {
                 script {
