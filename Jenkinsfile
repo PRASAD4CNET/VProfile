@@ -1,4 +1,3 @@
-def mavn_ver ="1.0.0"
 pipeline {
     agent any
     tools { 
@@ -11,10 +10,9 @@ pipeline {
             steps {
                 script {
                     sh 'mvn clean package'
-                     def maven_version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
+                     //def maven_version = sh script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout', returnStdout: true
                          //sh "mvn package -DskipTests=true"
-                    mavn_ver=${maven_version}
-                       }
+                     }
             }
         }
         stage("Sonar Analysis") {
@@ -28,7 +26,7 @@ pipeline {
         stage("Publish to Nexus Repository Manager ") {
             steps {
                 script {
-                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: "target/vprofile-${mavn_ver}.war", type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '${mavn_ver}'    
+                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: "target/vprofile-4.0.0.war", type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '4.0.0'    
                     //nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-2.0.0.war', type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '1.0.0'
                 }
             }
