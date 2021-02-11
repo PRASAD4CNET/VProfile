@@ -4,6 +4,11 @@ pipeline {
         maven 'Maven_Home' 
        // jdk 'jdk8' 
     }
+    environment {
+    //Use Pipeline Utility Steps plugin to read information from pom.xml into env variables
+    IMAGE = readMavenPom().getArtifactId()
+    VERSION_ID = readMavenPom().getVersion()
+    }
         stages {
         
         stage("Maven Build") {
@@ -26,7 +31,7 @@ pipeline {
         stage("Publish to Nexus Repository Manager ") {
             steps {
                 script {
-                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: "target/vprofile-4.0.0.war", type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '4.0.0'    
+                    nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-${VERSION_ID}.war', type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '${VERSION_ID}'    
                     //nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-2.0.0.war', type: 'war']], credentialsId: '9056eeb9-1b6c-4652-bf56-e8f6248d09fa', groupId: 'com.carleton', nexusUrl: '10.5.5.7:8090', nexusVersion: 'nexus3', protocol: 'http', repository: 'testdemo-release', version: '1.0.0'
                 }
             }
