@@ -19,6 +19,19 @@ pipeline {
                 }
             }
         }
+        stage("Maven groovyu script") {
+            steps {
+                script {
+                    import hudson.model.*;
+                    import hudson.util.*;
+                    def thr = Thread.currentThread();
+                    def currentBuild = thr?.executable;
+                    def mavenVer = currentBuild.getParent().getModules().toArray()[0].getVersion();
+                    def newParamAction = new hudson.model.ParametersAction(new hudson.model.StringParameterValue("MAVEN_VERSION", mavenVer));
+                    currentBuild.addAction(newParamAction);
+                }
+            }
+        }
         stage("Sonar Analysis") {
             steps {
                 script {
