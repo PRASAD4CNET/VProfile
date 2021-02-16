@@ -4,7 +4,7 @@
     <groupId>com.carleton</groupId>
     <artifactId>vprofile</artifactId>
     <packaging>war</packaging>
-    <version>7.0.0</version>
+    <version>8.0.0</version>
     <name>test demo</name>
     <url>http://maven.apache.org</url>
     <properties>
